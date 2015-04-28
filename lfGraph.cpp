@@ -1,4 +1,4 @@
-#include "LFGraph.h"
+#include "lfGraph.h"
 
 /**
  * Constructor for LFGraph analytics enginer.

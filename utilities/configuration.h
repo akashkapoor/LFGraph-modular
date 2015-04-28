@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
+#include <cstring>
 #include "../host/host.h"
 
 #define BARRIER					"Barrier:"

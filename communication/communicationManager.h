@@ -6,6 +6,7 @@
 #include "barrier.h"
 #include "publishSubscribeServer.h"
 #include "scatterGatherServer.h"
+#include <boost/array.hpp>
 
 using namespace std;
 
