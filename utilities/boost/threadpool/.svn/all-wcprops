@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/599/langar-cpp/boost/threadpool
+END
+pool.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/pool.hpp
+END
+future.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/future.hpp
+END
+scheduling_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/scheduling_policies.hpp
+END
+task_adaptors.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/599/langar-cpp/boost/threadpool/task_adaptors.hpp
+END
+size_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/size_policies.hpp
+END
+shutdown_policies.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/shutdown_policies.hpp
+END
+pool_adaptors.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/598/langar-cpp/boost/threadpool/pool_adaptors.hpp
+END
