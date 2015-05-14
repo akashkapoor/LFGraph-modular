@@ -1,6 +1,7 @@
 #ifndef COMMUNICATION_MANAGER_H_
 #define COMMUNICATION_MANAGER_H_
 
+#include <boost/array.hpp>
 #include "../utilities/configuration.h"
 #include "../host/index.h"
 #include "barrier.h"

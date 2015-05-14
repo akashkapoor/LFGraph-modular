@@ -27,4 +27,7 @@
 *.out
 *.app
 
-EUMake
+.idea
+.DS_Store
+._.DS_Store
+*._*
