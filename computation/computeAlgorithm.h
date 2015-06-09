@@ -5,6 +5,7 @@
 
 class ComputeAlgorithm {
 public:
+	virtual void initPartition(GraphPartition *graph) = 0;
 	virtual void compute(GraphPartition *graph) = 0;
 };
 

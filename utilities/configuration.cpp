@@ -5,10 +5,10 @@
  * according to the configuration file, specified
  * thread count and vertex count.
  */
-Configuration::Configuration(char* configFileName) {
+Configuration::Configuration(char* configFileName, int hostId) {
 	barrierAddress = NULL;
 	barrierPort = -1;
-	machineId = -1;
+	machineId = hostId;
 	graphFileName = NULL;
 	hostCount = -1;
 	hosts = NULL;

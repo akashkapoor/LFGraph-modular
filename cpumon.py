@@ -25,7 +25,7 @@ def get_util(pid):
             	cpu.append(x[0])
             if x[1] > 1:
             	mem.append(x[1])
-            time.sleep(0.5)
+            time.sleep(0.1)
     except KeyboardInterrupt:
         print "CPU: max-" + str(max(cpu)) + " , avg-" + str(sum(cpu)/len(cpu))
         print "MEM: " + str(max(mem))

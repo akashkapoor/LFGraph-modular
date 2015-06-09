@@ -10,10 +10,9 @@
 #define BARRIER					"Barrier:"
 #define GRAPH_FILE				"GraphFile:"
 #define HOST_COUNT				"HostCount:"
-#define THIS_HOST_ADDRESS		"ThisHostAddress:"
 #define THIS_HOST_ID			"ThisHostID:"
 #define HOSTS					"Hosts:"
-#define THREAD_COUNT			"ThreadCount:"
+#define THREAD_COUNT			"PartitionCount:"
 #define VERTEX_COUNT			"VertexCount:"
 
 using namespace std;
@@ -21,7 +20,7 @@ using namespace std;
 class Configuration {
 	void readConfigFile(char *cfgFile);
 public:
-	Configuration(char* configFileName);
+	Configuration(char* configFileName, int hostId);
 	~Configuration();
 	void printConfiguration();
 	char *barrierAddress;

@@ -5,6 +5,7 @@
 
 class ComputeOptimized: public ComputeAlgorithm {
 public:
+	void initPartition(GraphPartition *graph);
 	void compute(GraphPartition *graph);
 };
 

@@ -1,5 +1,10 @@
 #include "computeOptimized.h"
 
-void ComputeOptimized::compute(GraphPartition *graph) {
+void ComputeOptimized::initPartition(GraphPartition *graph) {
+	//
+}
 
+
+void ComputeOptimized::compute(GraphPartition *graph) {
+	//
 }

@@ -40,7 +40,8 @@ void LFGraph::loadGraph(GraphLoader* loader) {
 void LFGraph::run() {
 	assert(graph != NULL);
 	timer.start();
-	optimizedCompute();// compute();
+	// optimizedCompute();
+	compute();
 	timer.stop();
 	timer.print();
 }

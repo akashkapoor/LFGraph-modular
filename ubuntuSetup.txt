@@ -1,0 +1,38 @@
+sudo apt-get update
+sudo apt-get install g++
+sudo apt-get install gcc
+sudo apt-get install build-essential
+sudo apt-get install libpam-dev
+sudo apt-get install libssl-dev
+sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev
+#INSTALL BOOST
+wget -O boost_1_51_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.51.0/boost_1_51_0.tar.gz/download
+tar xzvf boost_1_51_0.tar.gz
+cd boost_1_51_0/
+./bootstrap.sh --prefix=/usr/local
+user_configFile=`find $PWD -name user-config.jam`
+echo "using mpi ;" >> $user_configFile
+n=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
+sudo ./b2 --with=all -j $n install
+sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/local.conf'
+sudo ldconfig
+#DONE INSTALLING BOOST
+sudo apt-get install openssh-server
+####### GOOD ENOUGH FOR LFGraph++ ##########
+
+#############ZOOKEEPER###########
+sudo apt-get install python-software-properties
+sudo apt-get install -y openjdk-7-jdk
+
+cd ~
+mkdir opt
+cd opt/
+sudo wget http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+tar -xzf zookeeper-3.4.6.tar.gz
+cd zookeeper-3.4.6/
+cp conf/zoo_sample.cfg conf/zoo.cfg 
+bin/zkServer.sh 
+cd src/c
+./configure 
+make
+sudo make install
