@@ -9,14 +9,14 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     if(argc < 3) {
-        cerr << "usage: " << argv[0] << " <configuration_file> <this_host_id>" << endl;
+        cerr << "usage: " << argv[0] << " <configuration_file> <this_host_id> <algo>" << endl;
         exit(1);
     }
 
     Configuration *configuration = new Configuration(argv[1], atoi(argv[2]));
     ComputeAlgorithm *algo = new ComputeOptimized();
 
-    LFGraph graphEngine(configuration, algo);
+    LFGraph graphEngine(configuration, algo, atoi(argv[3]));
     graphEngine.loadGraph();
     graphEngine.run();
 

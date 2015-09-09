@@ -4,10 +4,13 @@
  * Constructor for LFGraph analytics enginer.
  * Requires Configuration object and ComputeAlgorithm.
  */
-LFGraph::LFGraph(Configuration *cfg, ComputeAlgorithm *algorithm) {
+LFGraph::LFGraph(Configuration *cfg, ComputeAlgorithm *algorithm, int algo) {
 	
 	this->cfg = cfg;
 	this->algorithm = algorithm;
+
+	this->algo = algo;
+
 	cfg->printConfiguration();
 	graph = new GraphPartition(cfg);
 	communicator = new CommunicationManager(cfg, graph);
@@ -131,7 +134,18 @@ void LFGraph::compute() {
 
 	for (int step = 0; step < 5; step++) {
 		for (int i = 0; i < (cfg->threadCount); i++) {
-			tpool.schedule(boost::bind(&LFGraph::computationPerPartition, this, i, step));
+			if(this->algo == PageRank) {
+				cout<<"PageRank"<<endl;
+				tpool.schedule(boost::bind(&LFGraph::computationPerPartition, this, i, step));	
+			}
+			else if(this->algo == ShortestPath) {
+				cout<<"ShortestPath"<<endl;
+				tpool.schedule(boost::bind(&LFGraph::shortest_path, this, i, step));	
+			}
+			else if(this->algo == ConnectedComponent) {
+				cout<<"ConnectedComponent"<<endl;
+				tpool.schedule(boost::bind(&LFGraph::connected_components, this, i, step));	
+			}
 		}
 		tpool.wait();
 
@@ -171,4 +185,68 @@ void LFGraph::computationPerPartition(int wid, int step) {
 			(graph->vertices)[wid][i].value = 1;
 		}
 	}
+}
+
+
+/*
+ * Vertex-centric non-optimized shortest path computation.
+ */
+void LFGraph::connected_components(int wid, int step) {
+  int i, j;
+  if (step > 0) {
+    for (i = 0; i < (graph->partitionVertexCount)[wid]; i++) {
+      int friend_count = (graph->vertices)[wid][i].friendCount;
+      int min = INT_MAX;
+      for (j = 0; j < friend_count; j++) {
+        int fid = (graph->vertices)[wid][i].friendList[j];
+        if ((graph->shadowedReadValue)[fid] < min) {
+          min = (graph->shadowedReadValue)[fid];
+        }
+      }
+      
+      if ((graph->shadowedReadValue)[(graph->vertices)[wid][i].id] > min) {
+        (graph->vertices)[wid][i].value = min;
+      }
+    }
+  } else {
+    for (i = 0; i < (graph->partitionVertexCount)[wid]; i++) {
+      (graph->vertices)[wid][i].value = (graph->vertices)[wid][i].id;
+    }
+  }
+}
+
+/*
+ * Vertex-centric non-optimized shortest path computation.
+ */
+void LFGraph::shortest_path(int wid, int step) {
+  int i, j;
+  if (step > 0) {
+    for (i = 0; i < (graph->partitionVertexCount)[wid]; i++) {
+      int friend_count = (graph->vertices)[wid][i].friendCount;
+      int min = INT_MAX;
+      for (j = 0; j < friend_count; j++) {
+        
+        int fid = (graph->vertices)[wid][i].friendList[j];
+        if ((graph->shadowedReadValue)[fid] < min) {
+          min = (graph->shadowedReadValue)[fid];
+        }
+      }
+      
+      if ((int) (graph->shadowedReadValue)[(graph->vertices)[wid][i].id] - 1 > min) {
+        (graph->vertices)[wid][i].value = min + 1;
+        //write_buffer[v[wid][i].id] = min + 1;
+      }
+    }
+  } else {
+    for (i = 0; i < (graph->partitionVertexCount)[wid]; i++) {
+      if ((graph->vertices)[wid][i].id == 94274478) {
+        (graph->vertices)[wid][i].value = 0;
+        //write_buffer[v[wid][i].id] = 0;
+        
+      } else {
+        (graph->vertices)[wid][i].value = INT_MAX;
+        //write_buffer[v[wid][i].id] = INT_MAX;
+      }
+    }
+  }
 }

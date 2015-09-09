@@ -81,8 +81,7 @@ public:
    */
   void set_callback(boost::function<void(server_list* cur,
                                          std::string name_space,
-                                         std::vector<std::string> server)
-                    > fn);
+                                         std::vector<std::string> server) > fn);
   
 private:
   std::string prefix, serveridentifier;
